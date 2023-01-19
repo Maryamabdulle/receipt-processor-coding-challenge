@@ -55,7 +55,9 @@ If you would like to use a different database, you will need to update the conne
 
 - It is also possible to update or delete a receipt by sending a PATCH or DELETE request to http://localhost:5000/receipts/<receipt_id>/ respectively.
 
+## Summary
 
+Flask application that connect to a PostgreSQL database, defines several routes for performing CRUD operation on receipt data, and calculates points based on the receipt data. 
 
 
 
