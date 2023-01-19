@@ -1,0 +1,16 @@
+{
+    "retailer": "Walmart",
+    "purchase_date": "2022-01-01",
+    "purchase_time": "12:00:00",
+    "items": [
+        {
+            "name": "item1",
+            "price": 10.0
+        },
+        {
+            "name": "item2",
+            "price": 20.0
+        }
+    ],
+    "total": 30.0
+}
