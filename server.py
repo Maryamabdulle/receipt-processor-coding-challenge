@@ -7,7 +7,7 @@ import uuid
 app = Flask(__name__)
 
 # Create an engine to connect to the database
-engine = create_engine("postgresql://maryama:mypassword@localhost:5000/testdb")
+engine = create_engine("postgresql://maryam:mypassword@localhost:5000/testdb")
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
