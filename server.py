@@ -72,7 +72,7 @@ def get_points(receipt_id):
     else:
         return jsonify({'error': 'Receipt not found'}), 404
 
-if name == 'main':
+if __name__ == "__main__":
     app.run(debug=True)   
     
    
