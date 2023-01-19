@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from sqlalchemy import create_engine, String, Data, Time, ARRAY
+from sqlalchemy import create_engine, String, Time, ARRAY
 from sqlalchemy.orm import sessionmaker
 from model import Receipt, Base
 import uuid
