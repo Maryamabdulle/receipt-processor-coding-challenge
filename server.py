@@ -1,13 +1,14 @@
 from flask import Flask, jsonify, request
-from sqlalchemy import create_engine, String, Time, ARRAY
+from sqlalchemy import create_engine #String, Data, Time, ARRAY
 from sqlalchemy.orm import sessionmaker
 from model import Receipt, Base
 import uuid
+import datetime
 
 app = Flask(__name__)
 
 # Create an engine to connect to the database
-engine = create_engine("postgresql://maryam:mypassword@localhost:5000/testdb")
+engine = create_engine("postgresql://maryamabdulle:mypassword@localhost:5432/testdb")
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
@@ -31,6 +32,7 @@ def get_receipt(receipt_id):
     else:
         return jsonify({'error': 'Receipt not found'}), 404
 
+
 @app.route('/receipts/process', methods=['POST'])
 def process_receipt():
     """
@@ -38,26 +40,44 @@ def process_receipt():
     """
     data = request.get_json()
     # Validate receipt data
-    if (data.get('retailer') and data.get('purchase_date') and data.get('purchase_time') and data.get('items') and data.get('total') and isinstance(data.get('total'), (int, float))):
+    if (data.get('retailer') and data.get('purchase_date') and data.get('purchase_time') and data.get('items') and data.get('total') and isinstance(data.get('total'), (float))):
         for item in data.get('items'):
-            if not (item.get('name') and item.get('price') and isinstance(item.get('price'), (int, float))):
+            if not (item.get('name') and item.get('price') and isinstance(item.get('price'), (float))):
                 return jsonify({'error': 'Invalid receipt data'}), 400
     # Assign ID to receipt
     receipt_id = str(uuid.uuid4())
-    receipt = Receipt(id=receipt_id, retailer=data.get('retailer'), purchase_date=data.get('purchase_date'), purchase_time=data.get('purchase_time'), items=data.get('items'), total=data.get('total'))
+    receipt = Receipt(id=receipt_id, retailer=data.get('retailor'), purchase_date=data.get('purchase_date'), purchase_time=data.get('purchase_time'), items=data.get('items'), total=data.get('total'),points=data.get('points'))
     session.add(receipt)
     session.commit()
-    
     # Calculate points based on receipt data
-    items = data.get('items')
     points = 0
-    for item in items:
-        points += int(float(item['price']) * 100)
-    
-    # Return receipt ID
-        return jsonify({'id': receipt_id,'points': points}), 200
-    else:
-        return jsonify({'error': 'Invalid receipt data'}), 400
+    #1 point for every alphanumeric character in the retailer name
+    points += sum(c.isalnum() for c in data.get('retailer'))
+    #50 points if the total is a round dollar amount with no cents
+    if data.get('total') % 1 == 0:
+        points += 50
+    #25 points if the total is a multiple of 0.25
+    if data.get('total') % 0.25 == 0:
+        points += 25
+    #5 points for every two items on the receipt
+    points += (len(data.get('items')) // 2) * 5
+    #If the trimmed length of the item description is a multiple of 3, multiply the price by 0.2 and round up to the nearest integer. The result is the number of points earned
+    for item in data.get('items'):
+        if len(item.get('name').strip()) % 3 == 0:
+            item_points = int(round(item.get('price') * 0.2))
+            points += item_points
+    #6 points if the day in the purchase date is odd
+    purchase_date = datetime.datetime.strptime(data.get('purchase_date'), '%Y-%m-%d')
+    if purchase_date.day % 2 == 1:
+        points += 6
+    #10 points if the time of purchase is after 2:00pm and before 4:00pm
+    purchase_time = datetime.datetime.strptime(data.get('purchase_time'), '%H:%M:%S').time()
+    if purchase_time >= datetime.time(14, 0) and purchase_time < datetime.time(16, 0):
+        points += 10
+
+    return jsonify({'id': receipt_id, 'points': points}), 200
+
+
 @app.route('/receipts/<receipt_id>/points', methods=['GET'])
 def get_points(receipt_id):
     """
@@ -73,9 +93,7 @@ def get_points(receipt_id):
         return jsonify({'error': 'Receipt not found'}), 404
 
 if __name__ == "__main__":
-    app.run(debug=True)   
-    
-   
+    app.run(debug=True,port=5001)  
 
 
 
@@ -88,6 +106,74 @@ if __name__ == "__main__":
 
 
 
+
+
+
+
+
+
+
+
+#######################
+# @app.route('/receipts/process', methods=['POST'])
+# def process_receipt():
+#     """
+#     Processes a receipt by inserting it into the database and calculating the points awarded
+#     """
+#     data = request.get_json()
+#     # Validate receipt data
+#     if (data.get('retailer') and data.get('purchase_date') and data.get('purchase_time') and data.get('items') and data.get('total') and isinstance(data.get('total'), (int, float))):
+#         for item in data.get('items'):
+#             if not (item.get('name') and item.get('price') and isinstance(item.get('price'), (int, float))):
+#                 return jsonify({'error': 'Invalid receipt data'}), 400
+#     # Assign ID to receipt
+#     receipt_id = str(uuid.uuid4())
+#     receipt = Receipt(id=receipt_id, retailer=data.get('retailer'), purchase_date=data.get('purchase_date'), purchase_time=data.get('purchase_time'), items=data.get('items'), total=data.get('total'))
+#     session.add(receipt)
+#     session.commit()
+
+#     # Calculate points based on receipt data
+#     points = 0
+#     #1 point for every alphanumeric character in the retailer name
+#     points += sum(c.isalnum() for c in data.get('retailer'))
+#     #50 points if the total is a round dollar amount with no cents
+#     if data.get('total') % 1 == 0:
+#         points += 50
+#     #25 points if the total is a multiple of 0.25
+#     if data.get('total') % 0.25 == 0:
+#      points += 25
+#         #5 points for every two items on the receipt
+#     points += (len(data.get('items')) // 2) * 5
+#     #If the trimmed length of the item description is a multiple of 3, multiply the price by 0.2 and round up to the nearest integer. The result is the number of points earned
+#     for item in data.get('items'):
+#         if len(item.get('name').strip()) % 3 == 0:
+#             item_points = int(round(item.get('price') * 0.2))
+#             points += item_points
+#     #6 points if the day in the purchase date is odd
+#     import datetime
+#     purchase_date = datetime.datetime.strptime(data.get('purchase_date'), '%Y-%m-%d')
+#     if purchase_date.day % 2 == 1:
+#         points += 6
+#     #10 points if the time of purchase is after 2:00pm and before 4:00pm
+#     purchase_time = datetime.datetime.strptime(data.get('purchase_time'), '%H:%M:%S')
+#     if purchase_time.time() >= datetime.time(14, 0) and purchase_time.time() < datetime.time(16, 0):
+#         points += 10
+
+#     return jsonify({'id': receipt_id,'points': points}), 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 # from flask import Flask, jsonify, request

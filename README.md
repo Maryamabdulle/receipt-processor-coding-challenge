@@ -58,7 +58,3 @@ If you would like to use a different database, you will need to update the conne
 ## Summary
 
 Flask application that connect to a PostgreSQL database, defines several routes for performing CRUD operation on receipt data, and calculates points based on the receipt data. 
-
-
-
-
