@@ -42,7 +42,7 @@ This is a receipt processing web service built using Python 3, Flask, and SQLAlc
 
 ## Usage
 
-# Some of the Project routes:
+# The Project routes:
 
 - GET /receipts: Returns all receipts in the database
 - GET /receipts/<receipt_id>: Returns a single receipt with the given ID
@@ -53,12 +53,12 @@ This is a receipt processing web service built using Python 3, Flask, and SQLAlc
 
 - You can use any tool that allows you to make HTTP requests, such as cURL in this case so that user is able to make the various request types (GET, POST, PATCH, DELETE) to the correct endpoint URLs.
 
-# For example, I can use the following command to send a GET request to the /receipts endpoint:
+## For example, I can use the following command to send a GET request to the /receipts endpoint:
 - `curl -X GET http://127.0.0.1:5001/receipts`
 - It will return a JSON object containing all the receipts data
 - You can also test the other endpoints in a similar way.
 
-# For example, I  can use the following command To sent a POST request to the /receipts/process and before that run these interactively on terminal:
+## For example, I  can use the following command To sent a POST request to the /receipts/process and before that run these interactively on terminal:
 - `python`
 - `import flask`
 - `import requests`
@@ -68,7 +68,7 @@ This is a receipt processing web service built using Python 3, Flask, and SQLAlc
 - It should be returning: Response[200] if its successful but if there's an error than it will return Response[500]
 
 
-# Note:
+## Note:
 
 Please contact me at iammaryamabdulle@gmail.com if you have any questions. 
 
