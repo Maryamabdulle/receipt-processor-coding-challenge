@@ -34,6 +34,7 @@ This is a receipt processing web service built using Python 3, Flask, and SQLAlc
 5. Create the necessary tables by running the following command:
 
 - `python3 database.py`
+- `python2 model.py`
 
 6. Run the server
 - `python3 server.py`
