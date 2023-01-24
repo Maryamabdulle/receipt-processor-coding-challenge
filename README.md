@@ -51,7 +51,7 @@ This is a receipt processing web service built using Python 3, Flask, and SQLAlc
 
 ## Test the endpoints by making requests to the URLs 
 
-- You can use any tool that allows you to make HTTP requests, such as cURL in this case so that user is able to make the various request types (GET, POST, PATCH, DELETE) to the correct endpoint URLs.
+- You can use any tool that allows you to make HTTP requests, such as CURL so that user is able to make the various request types (GET, POST, PATCH, DELETE) to the correct endpoint URLs.
 
 ## For example, I can use the following command to send a GET request to the /receipts endpoint:
 - `curl -X GET http://127.0.0.1:5001/receipts`
