@@ -39,7 +39,7 @@ This is a receipt processing web service build using Python 3, Flask, and SQLAlc
 6. Run the server
 `python3 server.py`
 
-7. Test the endpoints using 
+7. Test the endpoints 
 
 ## Usage
 
@@ -60,10 +60,17 @@ This is a receipt processing web service build using Python 3, Flask, and SQLAlc
 - You can also test the other endpoints in a similar way.
 
 # For example, I  can use the following command To sent a POST request to the /receipts/process and before that run these interactively on terminal:
-`python`
-`import flask`
-`import requests`
-`response = requests.post("http://127.0.0.1:5001/receipts/process",json={"retailer": "Walmart","purchase_date": "2022-01-01","purchase_time": "12:00:00","items":[{"name": "item1","price": 10.0},{"name": "item2","price": 20.0}],"total": 30.0,"points":0})`
-`print(response)`
+- `python`
+- `import flask`
+- `import requests`
+- `response = requests.post("http://127.0.0.1:5001/receipts/process",json={"retailer": "Walmart","purchase_date": "2022-01-01" "purchase_time": "12:00:00","items":[{"name": "item1","price": 10.0},{"name": "item2","price": 20.0}],"total": 30.0,"points":0})`
+- `print(response)`
 
 - It should be returning: Response[200] if its successful but if there's error than it will return Response[500]
+
+
+# Note:
+
+Please contact me at iammaryamabdulle@gmail.com if you have any questions. 
+
+Thank you 
