@@ -1,1 +1,38 @@
-{"receipts": [{"id": 1, "retailer": "Walmart", "purchase_date": "2022-01-01", "purchase_time": "10:00:00", "items": [{"name": "Toothpaste", "price": 2.99}, {"name": "Toothbrush", "price": 4.99}], "total": 7.98}, {"id": 2, "retailer": "Costco", "purchase_date": "2022-01-02", "purchase_time": "11:00:00", "items": [{"name": "Shampoo", "price": 6.99}, {"name": "Conditioner", "price": 8.99}], "total": 15.98}]}
+{
+    "receipts": [
+        {
+            "id": 1,
+            "retailer": "Walmart",
+            "purchase_date": "2022-01-01",
+            "purchase_time": "10:00:00",
+            "items": [
+                {
+                    "name": "Toothpaste",
+                    "price": 2.99
+                },
+                {
+                    "name": "Toothbrush",
+                    "price": 4.99
+                }
+            ],
+            "total": 7.98
+        },
+        {
+            "id": 2,
+            "retailer": "Costco",
+            "purchase_date": "2022-01-02",
+            "purchase_time": "11:00:00",
+            "items": [
+                {
+                    "name": "Shampoo",
+                    "price": 6.99
+                },
+                {
+                    "name": "Conditioner",
+                    "price": 8.99
+                }
+            ],
+            "total": 15.98
+        }
+    ]
+}
