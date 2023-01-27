@@ -8,8 +8,34 @@ app = Flask(__name__)
 try:
     with open('receipts.json', 'r') as f:
         receipts_data = json.load(f)
-except:
+except FileNotFoundError:
     receipts_data = []
+except json.decoder.JSONDecodeError:
+    receipts_data = []
+
+@app.route('/receipts', methods=['POST'])
+def add_receipt():
+    """
+    Adds a new receipt and returns the receipt with its ID
+    """
+    data = request.get_json()
+    points = data.get('points')
+    if points is None:
+        return jsonify({"error": "Invalid data"}), 400
+
+    new_receipt = {
+        "id": len(receipts_data) + 1,
+        "points": points
+    }
+    receipts_data.append(new_receipt)
+
+    try:
+        with open('receipts.json', 'w') as f:
+            json.dump(receipts_data, f)
+        return jsonify({"status": "success", "receipt": new_receipt}), 201
+    except:
+        return jsonify({"status": "error", "message": "Could not write to receipts.json"}), 500
+
 
 @app.route('/receipts', methods=['GET'])
 def get_all_receipts():
@@ -64,16 +90,34 @@ def process_receipt():
     else:
         return {"status": "error", "message": "Invalid receipt data"}
 
+# @app.route('/receipts/<receipt_id>/points', methods=['GET'])
+# def get_points(receipt_id):
+#     """
+#     Returns the points awarded for a receipt with the given ID
+#     """
+#     receipt = [r for r in receipts_data if r['id'] == int(receipt_id)][0]
+#     if receipt:
+#         return jsonify({"points": receipt["points"]}), 200
+#     else:
+#         return jsonify({"error": "Receipt not found"}), 404
+
 @app.route('/receipts/<receipt_id>/points', methods=['GET'])
 def get_points(receipt_id):
     """
     Returns the points awarded for a receipt with the given ID
     """
-    receipt = [r for r in receipts_data if r['id'] == int(receipt_id)][0]
+    try:
+        receipt = [r for r in receipts_data if r['id'] == int(receipt_id)][0]
+    except IndexError:
+        return jsonify({"error": "Receipt not found"}), 404
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {e}"}), 500
+    
     if receipt:
         return jsonify({"points": receipt["points"]}), 200
     else:
         return jsonify({"error": "Receipt not found"}), 404
+
 
 if __name__ == '__main__':
     app.run()

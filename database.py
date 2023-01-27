@@ -30,13 +30,19 @@ def get_receipt(receipt_id):
             return receipt
     return None
 
-def add_receipt(receipt_id, retailer, purchase_date, purchase_time, items, total):
-    with open("receipts.json", "r") as json_file:
-        data = json.load(json_file)
-    receipt = {"id": receipt_id, "retailer": retailer, "purchase_date": purchase_date, "purchase_time": purchase_time, "items": items, "total": total}
-    data["receipts"].append(receipt)
-    with open("receipts.json", "w") as json_file:
-        json.dump(data, json_file)
+def add_receipt(new_receipt):
+    try:
+        with open('receipts.json', 'r') as json_file:
+            data = json.load(json_file)
+    except:
+        # Handle the exception here, for example by returning a message to the user
+        return "Error: Could not read json file"
+    # Append the new receipt data to the existing data
+    data['receipts'].append(new_receipt)
+    # Save the updated data to the json file
+    with open("receipts.json","w") as json_file:
+        json.dump(data,json_file)
+
 
 def update_receipt(receipt_id, retailer, purchase_date, purchase_time, items, total):
     with open("receipts.json", "r") as json_file:
@@ -69,13 +75,13 @@ def get_all_receipts():
         data = json.load(json_file)
     return data["receipts"]
 
-def get_receipt(receipt_id):
-    with open("receipts.json", "r") as json_file:
-        data = json.load(json_file)
-    for receipt in data["receipts"]:
-        if receipt["id"] == receipt_id:
-            return receipt
-    return None
+# def get_receipt(receipt_id):
+#     with open("receipts.json", "r") as json_file:
+#         data = json.load(json_file)
+#     for receipt in data["receipts"]:
+#         if receipt["id"] == receipt_id:
+#             return receipt
+#     return None
 
    
 
