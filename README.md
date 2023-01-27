@@ -22,14 +22,14 @@ This is a receipt processing web service built using Python 3, Flask, and JSON d
 
 ## Running the code
 
-- To run the code, use the following command: `python server.py`
+- To run the code, use the following command: `python3 server.py`
 
-- To run the model.py, use the following command: `python model.py` and expected output should be:
+- To run the model.py, use the following command: `python3 model.py` and expected output should be:
 `{'receipts': [{'id': 1, 'retailer': 'Walmart', 'purchase_date': '2022-01-01', 'purchase_time': '10:00:00', 'items': [{'name': 'Toothpaste', 'price': 2.99}, {'name': 'Toothbrush', 'price': 4.99}], 'total': 7.98, 'points': 0}, {'id': 2, 'retailer': 'Costco', 'purchase_date': '2022-01-02', 'purchase_time': '11:00:00', 'items': [{'name': 'Shampoo', 'price': 6.99}, {'name': 'Conditioner', 'price': 8.99}], 'total': 15.98, 'points': 0}], 'd5a34eb7-0838-4384-9051-fca0c224158a': {'id': 'd5a34eb7-0838-4384-9051-fca0c224158a', 'retailer': 'Walmart', 'purchase_date': '2022-01-01', 'purchase_time': '12:00:00', 'items': [{'name': 'item1', 'price': 10.0, 'points': 1}, {'name': 'item2', 'price': 20.0, 'points': 2}], 'total': 30.0, 'points': 0}, 'ab841729-eba2-4c45-821f-408b18bae219': {'id': 'ab841729-eba2-4c45-821f-408b18bae219', 'retailer': 'Walmart', 'purchase_date': '2022-01-01', 'purchase_time': '12:00:00', 'items': [{'name': 'item1', 'price': 10.0, 'points': 1}, {'name': 'item2', 'price': 20.0, 'points': 2}], 'total': 30.0, 'points': 0}, '01306e83-f7dc-4d72-8258-a320004ec662': {'id': '01306e83-f7dc-4d72-8258-a320004ec662', 'retailer': 'Walmart', 'purchase_date': '2022-01-01', 'purchase_time': '12:00:00', 'items': [{'name': 'item1', 'price': 10.0, 'points': 1}, {'name': 'item2', 'price': 20.0, 'points': 2}], 'total': 30.0, 'points': 0}, '744e44a9-ea08-4971-b4ba-b50f486b6bc7': {'id': '744e44a9-ea08-4971-b4ba-b50f486b6bc7', 'retailer': 'Walmart', 'purchase_date': '2022-01-01', 'purchase_time': '12:00:00', 'items': [{'name': 'item1', 'price': 10.0, 'points': 1}, {'name': 'item2', 'price': 20.0, 'points': 2}], 'total': 30.0, 'points': 0}}`
 
 - The code will start a local server on port 5000.
 
-## - Endpoints
+## Endpoints
 
 The following endpoints are available:
 
@@ -44,7 +44,7 @@ The following endpoints are available:
 
 - In case of any other error, the server will return a JSON object with a status key with the value error and a message key with a relevant message.
 
-# Testing the endpoints
+## Testing the endpoints
 
 - You can use any tool that allows you to make HTTP requests, such as CURL, to test the various request types (GET, POST, PATCH, DELETE) to the correct endpoint URLs.
 
