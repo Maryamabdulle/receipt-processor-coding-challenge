@@ -56,8 +56,9 @@ The following endpoints are available:
 
 - For example, you can use the following command to send a POST request to the /receipts/process endpoint:
 
-`import flask `
+`import flask`
 `import requests`
+`import json`
 `response = requests.post("http://127.0.0.1:5000/receipts/process", json={"retailer": "Walmart","purchase_date": "2022-01-01", "purchase_time": "12:00:00","items":[{"name": "item1","price": 10.0},{"name": "item2","price": 20.0}],"total": 30.0,"points":0})`
 `print(response)`
 
