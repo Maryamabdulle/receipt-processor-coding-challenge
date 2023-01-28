@@ -58,19 +58,19 @@ def add_receipt(retailer, purchase_date, purchase_time, items, total,points):
 
 
 #Create a new receipt object
-new_receipt = Receipt(str(uuid.uuid4()),"Walmart", "2022-01-01", "12:00:00", [{"name": "item1","price": 10.0,"points":1},{"name": "item2","price": 20.0,"points":2}], 30.0,0)
+#new_receipt = Receipt(str(uuid.uuid4()),"Walmart", "2022-01-01", "12:00:00", [{"name": "item1","price": 10.0,"points":1},{"name": "item2","price": 20.0,"points":2}], 30.0,0)
 
 #Load existing data from the json file
-existing_data = Receipt.load_data()
+#existing_data = Receipt.load_data()
 
 #Add the new receipt to the existing data
-existing_data.update({new_receipt.data['id']: new_receipt.data})
+#existing_data.update({new_receipt.data['id']: new_receipt.data})
 
 #Save the updated data back to the json file
-Receipt.save_data(existing_data)
+#Receipt.save_data(existing_data)
 
 #Print the data to check if the new receipt has been added
-print(existing_data)
+#print(existing_data)
 
 
 

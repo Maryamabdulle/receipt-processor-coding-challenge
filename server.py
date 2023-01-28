@@ -13,7 +13,7 @@ except FileNotFoundError:
 except json.decoder.JSONDecodeError:
     receipts_data = []
 
-@app.route('/receipts', methods=['POST'])
+@app.route('/receipts', methods=['POST']) 
 def add_receipt():
     """
     Adds a new receipt and returns the receipt with its ID
@@ -37,7 +37,7 @@ def add_receipt():
         return jsonify({"status": "error", "message": "Could not write to receipts.json"}), 500
 
 
-@app.route('/receipts', methods=['GET'])
+@app.route('/receipts', methods=['GET']) 
 def get_all_receipts():
     """
     Returns all receipts in the JSON file
@@ -55,29 +55,31 @@ def get_receipt(receipt_id):
     else:
         return jsonify({'error': 'Receipt not found'}), 404
 
-@app.route('/receipts/process', methods=['POST'])
+@app.route('/receipts/process', methods=['POST']) 
 def process_receipt():
     """
     Processes a receipt by inserting it into the JSON file and calculating the points awarded
     """
+    
     data = request.get_json()
+    #print(data)
     # Validate receipt data
-    if (data.get('retailer_name') and data.get('total') and data.get('items') and data.get('date') and data.get('time')):
+    if (data.get('retailer') and data.get('total') and data.get('items') and data.get('purchase_date') and data.get('purchase_time')):
         # Calculate points
         points = 0
-        points += len([char for char in data.get('retailer_name') if char.isalnum()])
+        points += len([char for char in data.get('retailer') if char.isalnum()])
         if data.get('total') % 1 == 0:
             points += 50
         if data.get('total') % 0.25 == 0:
             points += 25
         points += (len(data.get('items')) // 2) * 5
         for item in data.get('items'):
-            if (len(item.get('description').strip()) % 3 == 0):
-                points += round(item.get('price') * 0.2)
-        purchase_date = datetime.datetime.strptime(data.get('date'), '%Y-%m-%d')
+            #if (len(item.get('description').strip()) % 3 == 0):
+            points += round(item.get('price') * 0.2)
+        purchase_date = datetime.datetime.strptime(data.get('purchase_date'), '%Y-%m-%d')
         if purchase_date.day % 2 == 1:
             points += 6
-        purchase_time = datetime.datetime.strptime(data.get('time'), '%H:%M:%S').time()
+        purchase_time = datetime.datetime.strptime(data.get('purchase_time'), '%H:%M:%S').time()
         if purchase_time > datetime.time(14, 0) and purchase_time < datetime.time(16, 0):
             points += 10
         # Insert receipt into JSON file
@@ -90,18 +92,7 @@ def process_receipt():
     else:
         return {"status": "error", "message": "Invalid receipt data"}
 
-# @app.route('/receipts/<receipt_id>/points', methods=['GET'])
-# def get_points(receipt_id):
-#     """
-#     Returns the points awarded for a receipt with the given ID
-#     """
-#     receipt = [r for r in receipts_data if r['id'] == int(receipt_id)][0]
-#     if receipt:
-#         return jsonify({"points": receipt["points"]}), 200
-#     else:
-#         return jsonify({"error": "Receipt not found"}), 404
-
-@app.route('/receipts/<receipt_id>/points', methods=['GET'])
+@app.route('/receipts/<receipt_id>/points', methods=['GET'])  
 def get_points(receipt_id):
     """
     Returns the points awarded for a receipt with the given ID
