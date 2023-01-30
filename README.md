@@ -41,10 +41,9 @@ The code will start a local server on port 5000.
 - /receipts/process (POST): This route allows to process a receipt by inserting it into the JSON file and calculating the points awarded. When a client makes a POST request to this route with a JSON body, the function process_receipt() is executed. This function extracts the receipt data from the JSON body and validates it. If valid, it then calculates the points awarded for the receipt using different logic. It then inserts the receipt into the JSON file and returns the point awarded.
 
 ## Endpoints
-
 The following endpoints are available:
 
-- POST /receipts: Adds a new receipt to the JSON file. The request body should contain a JSON object with the following keys: retailer_name, total, items, date, and time.
+- POST /receipts: Adds a new receipt to the JSON file. The request body should contain a JSON object with the following keys: retailer, total, items, purchase_date, and purchase_time.
 - GET /receipts: Returns all receipts in the JSON file.
 - GET /receipts/<receipt_id>: Returns a single receipt with the given ID.
 - POST /receipts/process: Processes a receipt by inserting it into the JSON file and calculating the points awarded.
