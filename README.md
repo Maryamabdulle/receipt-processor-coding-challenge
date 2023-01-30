@@ -56,7 +56,7 @@ The following endpoints are available:
 - In case of any other error, the server will return a JSON object with a status key with the value error and a message key with a relevant message.
 
 ## Testing the endpoints
-- Make sure server is running before testing the endpoints 
+Make sure server is running before testing the endpoints 
 
 For example, you can use the following command to send a POST request to the /receipts endpoint:
 - `import flask`
