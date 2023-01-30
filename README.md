@@ -6,7 +6,7 @@ This is a receipt processing web service that allows users to input receipts, st
 
 - Python 3.6 or higher
 - Flask
-- Install JSON if using lower python version because it might not be included json module, in which case install using `pip install json` 
+- Install JSON if using lower python version because it might not be include json module, in which case install using `pip install json` 
 
 ## Installing
 - Clone the repository: https://github.com/Maryamabdulle/receipt-processor-coding-challenge.git
@@ -25,7 +25,7 @@ Create a virtual environment and activate it:
 
 - To run the model.py, use the following command: `python3 model.py`
 
-To run the database.py, use the following command: `python3 database.py`
+- To run the database.py, use the following command: `python3 database.py`
 
 The code will start a local server on port 5000.
 
@@ -81,6 +81,7 @@ If successful, this will be the outcome:
 - Response [200]
 - `print(response.json())`
 If successful, this will be the outcome: 
+print(response.json())
 - [{'id': 0, 'items': [{'name': 'item1', 'price': 10.0}, {'name': 'item2', 'price': 20.0}], 'points': 99, 'purchase_date': '2022-01-01', 'purchase_time': '12:00:00', 'retailer': 'Walmart', 'total': 30.0}, {'id': 2, 'points': 0}]
 
 For example, you can use the following command to send a POST request to the /receipts/process endpoint:
