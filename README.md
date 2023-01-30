@@ -65,10 +65,8 @@ For example, you can use the following command to send a POST request to the /re
 - `response = requests.post("http://127.0.0.1:5000/receipts",json=data)`
 - `print(response)`
 
-- If successful, this will be the outcome: 
-- Response [201]>
-- If successful, this will be the outcome: 
-{'receipt': {'id': 4, 'points': 20}, 'status': 'success'}
+- If successful, this will be the outcome: Response [201]>
+- If successful, this will be the outcome: {'receipt': {'id': 4, 'points': 20}, 'status': 'success'}
 
 - It will return a JSON object containing all the receipts data. You can also test the other endpoints in a similar way.
 
@@ -78,8 +76,7 @@ To make a Get requests to the /receipts endpoints:
 - `import json`
 - `response = requests.get("http://127.0.0.1:5000/receipts")`
 - `print(response)`
-If successful, this will be the outcome: 
-- Response [200]
+- If successful, this will be the outcome: Response [200]
 - `print(response.json())`
 - If successful, this will be the outcome: 
 `print(response.json())`
@@ -102,11 +99,9 @@ To make a Get requests to the /receipts/<receipt_id>/points endpoint:
 - `import json`
 - `response = requests.get("http://127.0.0.1:5000/receipts/0/points")` make sure to change the receipt_id to match an existing receipt's ID
 - `print(response)`
-If successful, this will be the outcome: 
-- Response [200]
+If successful, this will be the outcome: Response [200]
 - `print(response.json())`
-- If successful, this will be the outcome: 
-{'points': 99}
+- If successful, this will be the outcome: {'points': 99}
 
 ## Note:
 
