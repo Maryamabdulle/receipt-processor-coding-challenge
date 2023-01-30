@@ -65,7 +65,7 @@ For example, you can use the following command to send a POST request to the /re
 - `response = requests.post("http://127.0.0.1:5000/receipts",json=data)`
 - `print(response)`
 
-- If successful, this will be the outcome: Response [201]>
+- If successful, this will be the outcome: Response [201]
 - If successful, this will be the outcome: {'receipt': {'id': 4, 'points': 20}, 'status': 'success'}
 
 - It will return a JSON object containing all the receipts data. You can also test the other endpoints in a similar way.
