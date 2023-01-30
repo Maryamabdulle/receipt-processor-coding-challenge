@@ -64,9 +64,10 @@ For example, you can use the following command to send a POST request to the /re
 - `import json`
 - `response = requests.post("http://127.0.0.1:5000/receipts",json=data)`
 - `print(response)`
-If successful, this will be the outcome: 
-Response [201]>
-If successful, this will be the outcome: 
+
+- If successful, this will be the outcome: 
+- Response [201]>
+- If successful, this will be the outcome: 
 {'receipt': {'id': 4, 'points': 20}, 'status': 'success'}
 
 - It will return a JSON object containing all the receipts data. You can also test the other endpoints in a similar way.
@@ -80,8 +81,8 @@ To make a Get requests to the /receipts endpoints:
 If successful, this will be the outcome: 
 - Response [200]
 - `print(response.json())`
-If successful, this will be the outcome: 
-print(response.json())
+- If successful, this will be the outcome: 
+`print(response.json())`
 - [{'id': 0, 'items': [{'name': 'item1', 'price': 10.0}, {'name': 'item2', 'price': 20.0}], 'points': 99, 'purchase_date': '2022-01-01', 'purchase_time': '12:00:00', 'retailer': 'Walmart', 'total': 30.0}, {'id': 2, 'points': 0}]
 
 For example, you can use the following command to send a POST request to the /receipts/process endpoint:
@@ -90,9 +91,9 @@ For example, you can use the following command to send a POST request to the /re
 - `import json`
 - `response = requests.post("http://127.0.0.1:5000/receipts/process", json={"retailer": "Walmart","purchase_date": "2022-01-01", "purchase_time": "12:00:00","items":[{"name": "item1","price": 10.0},{"name": "item2","price": 20.0}],"total": 30.0,"points":0})`
 - `print(response)`
-It should return a Response [200] if successful, but if there's an error it will return Response [500].
+- It should return a Response [200] if successful, but if there's an error it will return Response [500].
 - `print(response.json())`
-If successful, this will be the outcome: 
+- If successful, this will be the outcome: 
 - {'points': 99, 'status': 'success'}
 
 To make a Get requests to the /receipts/<receipt_id>/points endpoint:
@@ -104,7 +105,7 @@ To make a Get requests to the /receipts/<receipt_id>/points endpoint:
 If successful, this will be the outcome: 
 - Response [200]
 - `print(response.json())`
-If successful, this will be the outcome: 
+- If successful, this will be the outcome: 
 {'points': 99}
 
 ## Note:
